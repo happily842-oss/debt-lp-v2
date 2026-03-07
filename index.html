@@ -827,7 +827,7 @@
                 <div class="exit-popup-merit">たった1分で完了</div>
             </div>
             <div class="exit-popup-btn-wrap">
-                <a href="#cta" class="exit-popup-btn" id="exitPopupBtn">診断を続ける</a>
+                <a href="https://saimucheck.com/page/s002/test.php" class="exit-popup-btn" id="exitPopupBtn">診断を続ける</a>
             </div>
         </div>
     </div>
@@ -854,11 +854,8 @@
 
             document.getElementById('exitPopupClose').addEventListener('click', closePopup);
 
-            document.getElementById('exitPopupBtn').addEventListener('click', function(e) {
-                e.preventDefault();
+            document.getElementById('exitPopupBtn').addEventListener('click', function() {
                 closePopup();
-                var cta = document.querySelector('.cta-section');
-                if (cta) cta.scrollIntoView({ behavior: 'smooth' });
             });
 
             popup.addEventListener('click', function(e) {
