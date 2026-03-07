@@ -211,33 +211,20 @@
             border-top: 3px solid #f0f0f0;
         }
 
-        .bridge-thanks-card {
-            background: #fff;
-            border: 2px solid #e63946;
-            border-radius: 14px;
-            padding: 20px 16px;
-            margin: -1px -4px 28px;
-            text-align: center;
-            position: relative;
-            top: -18px;
-            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.1);
-        }
-
         .bridge-thanks {
             text-align: center;
-            font-size: 20px;
-            font-weight: 900;
-            color: #e63946;
-            margin-bottom: 6px;
-            line-height: 1.4;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+            padding-top: 28px;
         }
 
         .bridge-thanks-sub {
             text-align: center;
-            font-size: 14px;
-            font-weight: 700;
-            color: #555;
-            margin-bottom: 10px;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 28px;
         }
 
         .flow-title {
@@ -280,27 +267,27 @@
 
         .reassure {
             background: #fff;
-            border: 1px solid #e8e8e8;
-            border-radius: 12px;
-            padding: 18px;
+            border: 2px solid #1a1a2e;
+            border-radius: 14px;
+            padding: 22px 20px;
             margin-bottom: 4px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
         }
 
         .reassure-title {
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 900;
             color: #1a1a2e;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 14px;
+            text-align: center;
+            line-height: 1.5;
         }
 
         .reassure-text {
-            font-size: 13px;
-            color: #555;
-            line-height: 1.8;
+            font-size: 15px;
+            color: #333;
+            line-height: 2;
+            font-weight: 700;
         }
 
         /* ===== CTA ===== */
@@ -735,7 +722,7 @@
             <div class="question-block">
                 <div class="q-label">
                     <span class="q-num">Q2</span>
-                    <span class="q-text">「減額診断」の特徴で魅力的だと思うものは？<br><span class="q-note">（複数回答可）</span></span>
+                    <span class="q-text">「減額診断」の魅力的だと思う点は？<br><span class="q-note">（複数回答可）</span></span>
                 </div>
                 <div class="choices">
                     <div class="choice" onclick="toggle(this)">無料で診断できる</div>
@@ -759,10 +746,8 @@
 
         <!-- ===== ブリッジ ===== -->
         <div class="bridge">
-            <div class="bridge-thanks-card">
-                <p class="bridge-thanks">＼ ありがとうございました！ ／</p>
-                <p class="bridge-thanks-sub">アンケートは以上になります。</p>
-            </div>
+            <p class="bridge-thanks">＼ ありがとうございました！ ／</p>
+            <p class="bridge-thanks-sub">アンケートは以上になります。</p>
 
             <p class="flow-title">これからの流れ</p>
             <img src="img/flow-steps.png" alt="これからの流れ：完全無料の減額診断（たった1分）→ 法律のプロからご連絡（無料相談）→ 最適プランのご提案（無理な勧誘なし）" class="flow-img">
