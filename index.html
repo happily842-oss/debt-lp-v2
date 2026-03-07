@@ -207,23 +207,52 @@
         /* ===== ブリッジ ===== */
         .bridge {
             background: #f8f8fb;
-            padding: 30px 20px;
+            padding: 0 20px 30px;
             border-top: 3px solid #f0f0f0;
+        }
+
+        .bridge-thanks-card {
+            background: #fff;
+            border: 2px solid #e63946;
+            border-radius: 14px;
+            padding: 20px 16px;
+            margin: -1px -4px 28px;
+            text-align: center;
+            position: relative;
+            top: -18px;
+            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.1);
+        }
+
+        .bridge-thanks-icon {
+            font-size: 36px;
+            margin-bottom: 6px;
         }
 
         .bridge-thanks {
             text-align: center;
-            font-size: 16px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 4px;
+            font-size: 20px;
+            font-weight: 900;
+            color: #e63946;
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
 
         .bridge-thanks-sub {
             text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .bridge-thanks-msg {
             font-size: 13px;
-            color: #888;
-            margin-bottom: 28px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .bridge-thanks-msg .pink-hl {
+            font-size: 14px;
         }
 
         .flow-title {
@@ -469,10 +498,10 @@
         }
 
         .about-heading {
-            background: linear-gradient(170deg, #0d1b2a 0%, #1b2840 100%);
-            color: #fff;
+            background: #fff;
+            color: #1a1a2e;
             text-align: center;
-            padding: 22px 20px 18px;
+            padding: 28px 20px 0;
             font-size: 22px;
             font-weight: 900;
             letter-spacing: 2px;
@@ -789,8 +818,12 @@
 
         <!-- ===== ブリッジ ===== -->
         <div class="bridge">
-            <p class="bridge-thanks">＼ ありがとうございました！ ／</p>
-            <p class="bridge-thanks-sub">アンケートは以上になります。</p>
+            <div class="bridge-thanks-card">
+                <div class="bridge-thanks-icon">🎉</div>
+                <p class="bridge-thanks">＼ ありがとうございました！ ／</p>
+                <p class="bridge-thanks-sub">アンケートは以上になります。</p>
+                <p class="bridge-thanks-msg">あとは<span class="pink-hl">無料診断フォーム</span>に進むだけ！<br>たった1分で完了します。</p>
+            </div>
 
             <p class="flow-title">これからの流れ</p>
             <div class="flow">
