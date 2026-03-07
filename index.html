@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>無料減額シミュレーター｜司法書士法人いざなみ</title>
+    <meta name="description" content="リボ払い・カードローン・キャッシングの借金がいくら減るか無料診断。法律のプロが対応。匿名OK・秘密厳守。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #e8e8e8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ===== FV ===== */
+        .fv {
+            background: linear-gradient(170deg, #0d1b2a 0%, #1b2840 45%, #1a1a2e 100%);
+            color: #fff;
+            padding: 28px 20px 22px;
+            text-align: center;
+            position: relative;
+        }
+
+        .fv::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffd700, #ff6b35, #e63946);
+        }
+
+        .fv-tags {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .fv-tag {
+            background: rgba(255,215,0,0.13);
+            border: 1px solid rgba(255,215,0,0.35);
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffd700;
+        }
+
+        .fv h1 {
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .fv h1 .em {
+            color: #ffd700;
+            font-size: 30px;
+            text-shadow: 0 0 24px rgba(255, 215, 0, 0.25);
+        }
+
+        .fv-sub {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        .fv-pr {
+            font-size: 10px;
+            opacity: 0.4;
+            text-align: right;
+            margin-bottom: 4px;
+        }
+
+        .fv-banner {
+            width: 100%;
+            max-width: 440px;
+            margin: 4px auto 14px;
+            display: block;
+        }
+
+        /* ===== クイズ ===== */
+        .quiz-section {
+            padding: 32px 20px 24px;
+            background: #fff;
+        }
+
+        .quiz-heading {
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .quiz-heading .accent {
+            color: #e63946;
+            font-size: 120%;
+            font-weight: 900;
+        }
+
+        .question-block { margin-bottom: 30px; }
+
+        .q-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .q-num {
+            background: linear-gradient(135deg, #e63946, #ff6b6b);
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
+        }
+
+        .q-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .q-note { font-size: 11px; color: #888; font-weight: 400; }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .choice {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            border: 2px solid #ddd;
+            padding: 14px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .choice::before {
+            content: '';
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+            background: #fff;
+        }
+
+        .choice:active {
+            transform: scale(0.98);
+        }
+
+        .choice.selected {
+            border-color: #e63946;
+            background: #fff5f5;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .choice.selected::before {
+            background: #e63946;
+            border-color: #e63946;
+            box-shadow: inset 0 0 0 3px #fff;
+        }
+
+        /* ===== ブリッジ ===== */
+        .bridge {
+            background: #f8f8fb;
+            padding: 30px 20px;
+            border-top: 3px solid #f0f0f0;
+        }
+
+        .bridge-thanks {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .bridge-thanks-sub {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 28px;
+        }
+
+        .flow-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .flow {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 22px;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 110px;
+            text-align: center;
+        }
+
+        .flow-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .flow-step:nth-child(1) .flow-icon { background: #e8f4fd; }
+        .flow-step:nth-child(3) .flow-icon { background: #e8f8e8; }
+        .flow-step:nth-child(5) .flow-icon { background: #fef3e8; }
+
+        .flow-step-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .flow-step-sub {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .flow-arrow {
+            color: #ccc;
+            font-size: 18px;
+            margin-top: 18px;
+            padding: 0 2px;
+        }
+
+        .trust-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .trust-chip {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .trust-chip::before {
+            content: '✓ ';
+            color: #2ecc71;
+            font-weight: 900;
+        }
+
+        .reassure {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 4px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+
+        .reassure-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .reassure-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 30px 20px 36px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .cta-message {
+            font-size: 18px;
+            font-weight: 900;
+            color: #1a1a2e;
+            line-height: 1.7;
+            margin-bottom: 6px;
+        }
+
+        .yellow-hl {
+            background: linear-gradient(transparent 60%, rgba(255, 255, 0, 0.45) 60%);
+            font-weight: 900;
+        }
+
+        .cta-arrow {
+            font-size: 22px;
+            color: #e63946;
+            margin-bottom: 10px;
+            letter-spacing: 6px;
+            animation: arrowBounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { opacity: 1; transform: translateY(0); }
+            50% { opacity: 0.5; transform: translateY(5px); }
+        }
+
+        /* Aura Button */
+        .cta-btn-wrap {
+            position: relative;
+            width: 85%;
+            max-width: 340px;
+            height: 66px;
+            margin: 0 auto 18px;
+        }
+
+        .cta-btn-wrap::before,
+        .cta-btn-wrap::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 100vh;
+            background: rgba(230, 57, 70, 0.35);
+        }
+
+        .cta-btn-wrap::before {
+            animation: auraBtn 2s ease-out infinite;
+        }
+
+        .cta-btn-wrap::after {
+            animation: auraBtn 2s ease-out 1s infinite;
+        }
+
+        @keyframes auraBtn {
+            0% { transform: scale(0.95); opacity: 1; }
+            90% { opacity: 0.1; }
+            100% { transform: scale(1.2, 1.5); opacity: 0; }
+        }
+
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e63946, #ff4757);
+            color: #fff;
+            font-size: 19px;
+            font-weight: 900;
+            border: none;
+            border-radius: 100vh;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.1s;
+        }
+
+        .cta-button:active { transform: scale(0.97); }
+
+        .cta-risk-badge {
+            display: inline-block;
+            background: #fff3f4;
+            border: 2px solid #e63946;
+            border-radius: 6px;
+            padding: 10px 24px;
+            font-size: 15px;
+            font-weight: 900;
+            color: #e63946;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.25); }
+            50% { box-shadow: 0 0 0 8px rgba(230, 57, 70, 0); }
+        }
+
+        .cta-sub-lines {
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        .cta-sub-line {
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .pink-hl {
+            color: #e63946;
+            font-weight: 900;
+        }
+
+        /* ===== 減額診断とは ===== */
+        .about-section {
+            padding: 0;
+            background: #fff;
+        }
+
+        .about-heading {
+            background: linear-gradient(170deg, #0d1b2a 0%, #1b2840 100%);
+            color: #fff;
+            text-align: center;
+            padding: 22px 20px 18px;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .about-body {
+            padding: 24px 24px 20px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: #333;
+            line-height: 2;
+        }
+
+        .about-body .em-line {
+            color: #e63946;
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .about-img {
+            width: 100%;
+            display: block;
+            padding: 0 16px 24px;
+        }
+
+        /* ===== 中間CTA ===== */
+        .mid-cta {
+            background: linear-gradient(170deg, #0d1b2a 0%, #1b2840 100%);
+            padding: 22px 20px;
+            text-align: center;
+        }
+
+        .mid-cta-text {
+            color: #fff;
+            font-size: 17px;
+            font-weight: 900;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .mid-cta-arrow {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            animation: arrowBounce 1.5s ease-in-out infinite;
+        }
+
+        .mid-cta-btn-wrap {
+            position: relative;
+            width: 85%;
+            max-width: 340px;
+            height: 60px;
+            margin: 0 auto;
+        }
+
+        .mid-cta-btn-wrap::before,
+        .mid-cta-btn-wrap::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 100vh;
+            background: rgba(230, 57, 70, 0.35);
+        }
+
+        .mid-cta-btn-wrap::before {
+            animation: auraBtn 2s ease-out infinite;
+        }
+
+        .mid-cta-btn-wrap::after {
+            animation: auraBtn 2s ease-out 1s infinite;
+        }
+
+        .mid-cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e63946, #ff4757);
+            color: #fff;
+            font-size: 17px;
+            font-weight: 900;
+            border: none;
+            border-radius: 100vh;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== フッター ===== */
+        .footer {
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        .footer-notes {
+            font-size: 8px;
+            color: #bbb;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .footer-links a {
+            font-size: 11px;
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover { text-decoration: underline; }
+
+        /* ===== 離脱ポップアップ ===== */
+        .exit-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .exit-popup.active {
+            display: flex;
+            animation: popupFadeIn 0.3s ease-out;
+        }
+
+        @keyframes popupFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .exit-popup-content {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 24px 24px;
+            width: 88%;
+            max-width: 360px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: popupSlideUp 0.3s ease-out;
+        }
+
+        @keyframes popupSlideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .exit-popup-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .exit-popup-heading {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .exit-popup-heading span {
+            background: linear-gradient(transparent 60%, rgba(255, 255, 0, 0.4) 60%);
+        }
+
+        .exit-popup-merits {
+            background: #f8f8fb;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .exit-popup-merit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .exit-popup-merit::before {
+            content: '◎';
+            color: #e63946;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .exit-popup-btn-wrap {
+            position: relative;
+            width: 100%;
+            height: 56px;
+            margin-bottom: 8px;
+        }
+
+        .exit-popup-btn-wrap::before,
+        .exit-popup-btn-wrap::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 100vh;
+            background: rgba(230, 57, 70, 0.3);
+        }
+
+        .exit-popup-btn-wrap::before {
+            animation: auraBtn 2s ease-out infinite;
+        }
+
+        .exit-popup-btn-wrap::after {
+            animation: auraBtn 2s ease-out 1s infinite;
+        }
+
+        .exit-popup-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e63946, #ff4757);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 900;
+            border: none;
+            border-radius: 100vh;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.35);
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== FV ===== -->
+        <div class="fv">
+            <div class="fv-tags">
+                <span class="fv-tag">リボ・クレカ</span>
+                <span class="fv-tag">ブラック・審査落ち</span>
+                <span class="fv-tag">全てOK</span>
+            </div>
+            <h1><span class="em">減額診断</span>を<br>知っていますか？</h1>
+            <img src="img/fv-icons.png" alt="ブラック・審査落ち リボ・クレカ カードローン・キャッシング" class="fv-banner">
+            <p class="fv-pr">[PR] 司法書士法人いざなみ</p>
+            <p class="fv-sub">毎月の返済、いくら減らせるか<br>無料で今すぐチェック</p>
+        </div>
+
+        <!-- ===== 減額診断とは ===== -->
+        <div class="about-section">
+            <div class="about-heading">減額診断とは</div>
+            <div class="about-body">
+                国家資格を持つ法律の専門家が<br>
+                運営していて<br>
+                年間7.6万人以上が利用<br>
+                3年連続でユーザー増加中<br>
+                <span class="em-line">"完全無料のサービス"</span><br>
+                なんです！
+            </div>
+            <img src="img/about-diagnosis.png" alt="減額診断の特徴：国家資格を持つ法律の専門家が運営、年間7.6万人以上が利用、3年連続ユーザー増加中、完全無料" class="about-img">
+        </div>
+
+        <!-- ===== 中間CTA ===== -->
+        <div class="mid-cta">
+            <p class="mid-cta-text">毎月の返済、いくら減らせるか</p>
+            <p class="mid-cta-arrow">↓無料で今すぐチェック↓</p>
+            <div class="mid-cta-btn-wrap">
+                <a href="https://saimucheck.com/page/s002/test.php" class="mid-cta-btn">次へ進む</a>
+            </div>
+        </div>
+
+        <!-- ===== クイズ ===== -->
+        <div class="quiz-section">
+            <p class="quiz-heading"><span class="accent">簡単3問</span>のアンケートに<br>ご協力お願いします！</p>
+
+            <div class="question-block">
+                <div class="q-label">
+                    <span class="q-num">Q1</span>
+                    <span class="q-text">今のお悩みはなんですか？<br><span class="q-note">（複数回答可）</span></span>
+                </div>
+                <div class="choices">
+                    <div class="choice" onclick="toggle(this)">毎月の返済が苦しい</div>
+                    <div class="choice" onclick="toggle(this)">完済の目処が立たない</div>
+                    <div class="choice" onclick="toggle(this)">滞納しそう、滞納している</div>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-label">
+                    <span class="q-num">Q2</span>
+                    <span class="q-text">「減額診断」の特徴で魅力的だと思うものは？<br><span class="q-note">（複数回答可）</span></span>
+                </div>
+                <div class="choices">
+                    <div class="choice" onclick="toggle(this)">無料で診断できる</div>
+                    <div class="choice" onclick="toggle(this)">匿名OK・家族にバレない</div>
+                    <div class="choice" onclick="toggle(this)">法律の専門家が運営のサービス</div>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-label">
+                    <span class="q-num">Q3</span>
+                    <span class="q-text">借金が減ったら何をしたいですか？<br><span class="q-note">（複数回答可）</span></span>
+                </div>
+                <div class="choices">
+                    <div class="choice" onclick="toggle(this)">支払いをなくして気持ちを楽にしたい</div>
+                    <div class="choice" onclick="toggle(this)">将来への貯金を始めたい</div>
+                    <div class="choice" onclick="toggle(this)">ブラックリストを卒業したい</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ブリッジ ===== -->
+        <div class="bridge">
+            <p class="bridge-thanks">＼ ありがとうございました！ ／</p>
+            <p class="bridge-thanks-sub">アンケートは以上になります。</p>
+
+            <p class="flow-title">これからの流れ</p>
+            <div class="flow">
+                <div class="flow-step">
+                    <div class="flow-icon">📋</div>
+                    <div class="flow-step-label">完全無料の<br>減額診断</div>
+                    <div class="flow-step-sub">たった1分</div>
+                </div>
+                <div class="flow-arrow">▸</div>
+                <div class="flow-step">
+                    <div class="flow-icon">📞</div>
+                    <div class="flow-step-label">法律のプロから<br>ご連絡</div>
+                    <div class="flow-step-sub">無料相談</div>
+                </div>
+                <div class="flow-arrow">▸</div>
+                <div class="flow-step">
+                    <div class="flow-icon">💡</div>
+                    <div class="flow-step-label">最適プランの<br>ご提案</div>
+                    <div class="flow-step-sub">無理な勧誘なし</div>
+                </div>
+            </div>
+
+            <div class="trust-row">
+                <span class="trust-chip">勧誘なし</span>
+                <span class="trust-chip">匿名OK</span>
+                <span class="trust-chip">秘密厳守</span>
+            </div>
+
+            <div class="reassure">
+                <div class="reassure-title">📞 お電話は「確認だけ」なのでご安心ください</div>
+                <div class="reassure-text">
+                    診断後、法律のプロからお電話します。<br><br>
+                    ・ 国家資格を持つ法律の専門家が無料相談<br>
+                    ・ 減額できる可能性のある金額と<br>　最適なプランをお伝えします<br>
+                    ・ 強引な勧誘は一切なく、「聞くだけ」でOK
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CTA ===== -->
+        <div class="cta-section">
+            <p class="cta-message"><span class="yellow-hl">あなたの借金がいくら減る可能性があるか</span><br>今すぐ確認！</p>
+            <p class="cta-arrow">↓ ↓ ↓</p>
+            <div class="cta-btn-wrap">
+                <a href="https://saimucheck.com/page/s002/test.php" class="cta-button">次へ進む</a>
+            </div>
+            <p class="cta-risk-badge">無料・匿名OKなのでリスク0！</p>
+            <div class="cta-sub-lines">
+                <p class="cta-sub-line">フォーム入力は<span class="pink-hl">1分ほどで完了</span>します。</p>
+                <p class="cta-sub-line"><span class="pink-hl">毎月多くの人</span>がこの診断を使用しています！</p>
+                <p class="cta-sub-line">しつこい勧誘等は<span class="pink-hl">一切ございません。</span></p>
+            </div>
+        </div>
+
+        <!-- ===== フッター ===== -->
+        <div class="footer">
+            <p class="footer-notes">
+                ※減額診断とは、過払い金の有無や任意整理によって月々の返済額がいくら減る可能性があるかを無料で診断するサービスです。<br>
+                ※借金は元金と利息を合わせた金額を指します。<br>
+                ※ご入力いただいた情報は、無料診断・相談以外の用途には一切使用しません。<br>
+                ※司法書士には守秘義務があり、お客様の情報を厳格に管理いたします。
+            </p>
+            <div class="footer-links">
+                <a href="https://saimucheck.com/page/s002/privacypolicy.php">プライバシーポリシー</a>
+                <a href="https://saimucheck.com/page/s002/office.php">運営者情報</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== 離脱ポップアップ ===== -->
+    <div class="exit-popup" id="exitPopup">
+        <div class="exit-popup-content">
+            <span class="exit-popup-close" id="exitPopupClose">&times;</span>
+            <p class="exit-popup-heading"><span>減額診断なら</span><br>こんなメリットが</p>
+            <div class="exit-popup-merits">
+                <div class="exit-popup-merit">完全無料で診断</div>
+                <div class="exit-popup-merit">匿名OK・家族にバレない</div>
+                <div class="exit-popup-merit">勧誘なし・聞くだけでOK</div>
+                <div class="exit-popup-merit">たった1分で完了</div>
+            </div>
+            <div class="exit-popup-btn-wrap">
+                <a href="#cta" class="exit-popup-btn" id="exitPopupBtn">診断を続ける</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggle(el) {
+            el.classList.toggle('selected');
+        }
+
+        (function() {
+            var shown = false;
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            var popup = document.getElementById('exitPopup');
+
+            function showPopup() {
+                if (shown) return;
+                popup.classList.add('active');
+                shown = true;
+            }
+
+            function closePopup() {
+                popup.classList.remove('active');
+            }
+
+            document.getElementById('exitPopupClose').addEventListener('click', closePopup);
+
+            document.getElementById('exitPopupBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                closePopup();
+                var cta = document.querySelector('.cta-section');
+                if (cta) cta.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) closePopup();
+            });
+
+            if (!isMobile) {
+                document.addEventListener('mouseleave', function(e) {
+                    if (e.clientY <= 0) showPopup();
+                });
+            }
+
+            if (isMobile) {
+                history.pushState(null, null, location.href);
+                window.addEventListener('popstate', function() {
+                    showPopup();
+                    history.pushState(null, null, location.href);
+                });
+
+                var touchStartY = 0;
+                document.addEventListener('touchstart', function(e) {
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+
+                document.addEventListener('touchmove', function(e) {
+                    if (touchStartY < 50 && e.touches[0].clientY > 100) showPopup();
+                }, { passive: true });
+            }
+        })();
+    </script>
+</body>
+</html>
