@@ -6,11 +6,14 @@ Your branch name contains a slash. Some tools break URLs like:
 
 Use one of these instead (verified HTTP 200, image/jpeg).
 
-JPEG (commit 5a377f6 — stable even if the branch is renamed):
-  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@5a377f6/brush_message_4x3.jpg
+JPEG (latest commit on this branch — includes this file):
+  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@c7ca837/brush_message_4x3.jpg
 
 PNG:
-  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@5a377f6/brush_message_4x3.png
+  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@c7ca837/brush_message_4x3.png
+
+Same artwork pinned to the image-only commit (if you prefer a shorter hash):
+  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@5a377f6/brush_message_4x3.jpg
 
 Same files on the feature branch (CDN):
   https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@cursor/-bc-a1d462e2-6284-451d-bcbc-61fab9717c8d-aef6/brush_message_4x3.jpg
