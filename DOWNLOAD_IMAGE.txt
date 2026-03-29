@@ -1,0 +1,33 @@
+Brush message image — direct download links
+============================================
+
+Why downloads sometimes fail
+----------------------------
+This branch is named `cursor/-bc-...` (a slash inside the name). Many apps build a broken
+`raw.githubusercontent.com/.../cursor/-bc-.../file.jpg` URL (the path splits at the wrong place).
+
+Fix: encode that slash as `%2F` in the branch segment, **or** use jsDelivr below.
+
+jsDelivr (recommended — follows branch tip)
+---------------------------------------------
+JPEG:
+  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@cursor/-bc-a1d462e2-6284-451d-bcbc-61fab9717c8d-aef6/brush_message_4x3.jpg
+
+PNG:
+  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@cursor/-bc-a1d462e2-6284-451d-bcbc-61fab9717c8d-aef6/brush_message_4x3.png
+
+GitHub Raw (encode the slash in the branch name)
+------------------------------------------------
+JPEG:
+  https://raw.githubusercontent.com/happily842-oss/debt-lp-v2/cursor%2F-bc-a1d462e2-6284-451d-bcbc-61fab9717c8d-aef6/brush_message_4x3.jpg
+
+PNG:
+  https://raw.githubusercontent.com/happily842-oss/debt-lp-v2/cursor%2F-bc-a1d462e2-6284-451d-bcbc-61fab9717c8d-aef6/brush_message_4x3.png
+
+Pinned commit (stable URL — image bytes from commit 5a377f6)
+------------------------------------------------------------
+  https://cdn.jsdelivr.net/gh/happily842-oss/debt-lp-v2@5a377f6/brush_message_4x3.jpg
+
+GitHub UI
+---------
+Open `brush_message_4x3.jpg` in the repo → **Raw** → save from the tab that shows only the image.
