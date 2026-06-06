@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0d1b2a">
+    <title>Google広告管理｜スマホ操作</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #f0f2f5;
+            --surface: #ffffff;
+            --text: #1a1a1a;
+            --muted: #6b7280;
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --success: #137333;
+            --success-bg: #e6f4ea;
+            --warning: #b06000;
+            --warning-bg: #fef7e0;
+            --danger: #c5221f;
+            --danger-bg: #fce8e6;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0,0,0,.08);
+            --radius: 14px;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+            min-height: 100vh;
+            padding-bottom: calc(16px + var(--safe-bottom));
+        }
+
+        .app {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(170deg, #0d1b2a 0%, #1b2840 100%);
+            color: #fff;
+            padding: 20px 16px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: .02em;
+        }
+
+        .header p {
+            font-size: 12px;
+            opacity: .8;
+            margin-top: 4px;
+        }
+
+        .icon-btn {
+            background: rgba(255,255,255,.12);
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .icon-btn:active { transform: scale(.95); }
+
+        .content { padding: 16px; }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+
+        .card h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform .1s;
+        }
+
+        .btn:active { transform: scale(.98); }
+        .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-google {
+            background: #fff;
+            color: #3c4043;
+            border: 1px solid var(--border);
+        }
+
+        .btn-danger {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        .btn-success {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            min-height: 40px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .stat {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .campaign-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .campaign {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px;
+        }
+
+        .campaign-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .campaign-name {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .badge {
+            flex-shrink: 0;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .badge-enabled { background: var(--success-bg); color: var(--success); }
+        .badge-paused { background: var(--warning-bg); color: var(--warning); }
+        .badge-other { background: #f3f4f6; color: var(--muted); }
+
+        .campaign-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .metric {
+            text-align: center;
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 8px 4px;
+        }
+
+        .metric-label {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .metric-value {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .campaign-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .campaign-actions .btn { min-height: 44px; font-size: 14px; }
+
+        .empty, .loading, .error-box {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .error-box {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .account-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: rgba(255,255,255,.08);
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+
+        .account-bar span { opacity: .9; word-break: break-all; }
+
+        .setup-list {
+            font-size: 13px;
+            color: var(--muted);
+            padding-left: 18px;
+            margin: 12px 0 16px;
+        }
+
+        .setup-list li { margin-bottom: 6px; }
+
+        .setup-list code {
+            background: #f3f4f6;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .hidden { display: none !important; }
+
+        .pull-hint {
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="header-top">
+                <div>
+                    <h1>Google広告管理</h1>
+                    <p>スマホからキャンペーンの停止・再開</p>
+                </div>
+                <button class="icon-btn hidden" id="refreshBtn" title="更新" aria-label="更新">↻</button>
+            </div>
+            <div class="account-bar hidden" id="accountBar">
+                <span id="accountEmail"></span>
+                <a href="/api/auth/logout" class="btn-outline" style="width:auto;padding:6px 12px;min-height:auto;color:#fff;border-color:rgba(255,255,255,.3);">ログアウト</a>
+            </div>
+        </header>
+
+        <main class="content">
+            <div id="errorBox" class="error-box hidden"></div>
+
+            <section id="loginView">
+                <div class="card">
+                    <h2>Googleアカウントでログイン</h2>
+                    <p>スマホのGoogle広告アプリより操作しやすい、シンプルな管理画面です。キャンペーンの一覧表示・停止・再開ができます。</p>
+                    <a href="/api/auth/login" class="btn btn-google" id="loginBtn">
+                        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.56 2.95-2.23 5.45-4.76 7.14l7.73 6c4.51-4.16 7.09-10.27 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24 24 0 0 0 0 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                        Googleでログイン
+                    </a>
+                </div>
+
+                <div class="card hidden" id="setupCard">
+                    <h2>初回セットアップが必要です</h2>
+                    <p>Vercelの環境変数に以下を設定してください。</p>
+                    <ol class="setup-list">
+                        <li><code>GOOGLE_ADS_CLIENT_ID</code> / <code>GOOGLE_ADS_CLIENT_SECRET</code></li>
+                        <li><code>GOOGLE_ADS_DEVELOPER_TOKEN</code></li>
+                        <li><code>GOOGLE_ADS_CUSTOMER_ID</code>（広告アカウントID）</li>
+                        <li><code>SESSION_SECRET</code>（ランダム文字列）</li>
+                        <li><code>APP_URL</code>（例: https://your-domain.vercel.app）</li>
+                    </ol>
+                    <p style="font-size:13px;color:var(--muted);">Google Cloud ConsoleでOAuthクライアントを作成し、リダイレクトURIに <code>{APP_URL}/api/auth/callback</code> を追加してください。</p>
+                </div>
+            </section>
+
+            <section id="dashboardView" class="hidden">
+                <div class="stats" id="statsRow">
+                    <div class="stat">
+                        <div class="stat-label">配信中</div>
+                        <div class="stat-value" id="statActive">-</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">停止中</div>
+                        <div class="stat-value" id="statPaused">-</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">本日の費用</div>
+                        <div class="stat-value" id="statCost">-</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">コンバージョン</div>
+                        <div class="stat-value" id="statConv">-</div>
+                    </div>
+                </div>
+
+                <div class="pull-hint">下に引っ張るか ↻ で更新</div>
+
+                <div id="campaignContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        キャンペーンを読み込み中...
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const STATUS_LABELS = {
+            ENABLED: '配信中',
+            PAUSED: '停止中',
+            REMOVED: '削除済み'
+        };
+
+        const CHANNEL_LABELS = {
+            SEARCH: '検索',
+            DISPLAY: 'ディスプレイ',
+            VIDEO: '動画',
+            SHOPPING: 'ショッピング',
+            PERFORMANCE_MAX: 'P-MAX',
+            DEMAND_GEN: 'デマンドジェネレーション'
+        };
+
+        const ERROR_MESSAGES = {
+            access_denied: 'ログインがキャンセルされました',
+            no_refresh_token: '認証に失敗しました。もう一度お試しください',
+            unauthorized_email: 'このアカウントはアクセスが許可されていません',
+            no_accounts: 'アクセス可能な広告アカウントが見つかりません',
+            missing_code: '認証コードがありません'
+        };
+
+        let campaigns = [];
+        let touchStartY = 0;
+        let pulling = false;
+
+        function formatYen(micros) {
+            const yen = Math.round(Number(micros || 0) / 1000000);
+            return '¥' + yen.toLocaleString('ja-JP');
+        }
+
+        function showError(message) {
+            const box = document.getElementById('errorBox');
+            box.textContent = message;
+            box.classList.remove('hidden');
+            setTimeout(() => box.classList.add('hidden'), 6000);
+        }
+
+        function getQueryError() {
+            const params = new URLSearchParams(location.search);
+            const error = params.get('error');
+            if (!error) return null;
+            history.replaceState(null, '', location.pathname);
+            return ERROR_MESSAGES[error] || decodeURIComponent(error);
+        }
+
+        async function checkAuth() {
+            const res = await fetch('/api/auth/status');
+            return res.json();
+        }
+
+        function renderCampaign(campaign) {
+            const isEnabled = campaign.status === 'ENABLED';
+            const isPaused = campaign.status === 'PAUSED';
+            const badgeClass = isEnabled ? 'badge-enabled' : isPaused ? 'badge-paused' : 'badge-other';
+
+            return `
+                <article class="campaign" data-id="${campaign.id}">
+                    <div class="campaign-header">
+                        <div class="campaign-name">${escapeHtml(campaign.name)}</div>
+                        <span class="badge ${badgeClass}">${STATUS_LABELS[campaign.status] || campaign.status}</span>
+                    </div>
+                    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">
+                        ${CHANNEL_LABELS[campaign.channelType] || campaign.channelType || 'キャンペーン'}
+                        ・ 日予算 ${formatYen(campaign.budgetMicros)}
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="metric">
+                            <div class="metric-label">費用</div>
+                            <div class="metric-value">${formatYen(campaign.costMicros)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">クリック</div>
+                            <div class="metric-value">${Number(campaign.clicks).toLocaleString('ja-JP')}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">CV</div>
+                            <div class="metric-value">${Number(campaign.conversions).toLocaleString('ja-JP')}</div>
+                        </div>
+                    </div>
+                    <div class="campaign-actions">
+                        ${isEnabled ? `
+                            <button class="btn btn-danger pause-btn" data-id="${campaign.id}">停止する</button>
+                        ` : isPaused ? `
+                            <button class="btn btn-success resume-btn" data-id="${campaign.id}">再開する</button>
+                        ` : `
+                            <button class="btn btn-outline" disabled>操作不可</button>
+                        `}
+                        <button class="btn btn-outline detail-btn" data-id="${campaign.id}">詳細</button>
+                    </div>
+                </article>
+            `;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function updateStats(list) {
+            const active = list.filter(c => c.status === 'ENABLED').length;
+            const paused = list.filter(c => c.status === 'PAUSED').length;
+            const totalCost = list.reduce((sum, c) => sum + Number(c.costMicros || 0), 0);
+            const totalConv = list.reduce((sum, c) => sum + Number(c.conversions || 0), 0);
+
+            document.getElementById('statActive').textContent = active;
+            document.getElementById('statPaused').textContent = paused;
+            document.getElementById('statCost').textContent = formatYen(totalCost);
+            document.getElementById('statConv').textContent = totalConv.toLocaleString('ja-JP');
+        }
+
+        function renderCampaigns(list) {
+            campaigns = list;
+            updateStats(list);
+
+            const container = document.getElementById('campaignContainer');
+            if (!list.length) {
+                container.innerHTML = '<div class="empty">キャンペーンがありません</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="campaign-list">${list.map(renderCampaign).join('')}</div>`;
+
+            container.querySelectorAll('.pause-btn').forEach(btn => {
+                btn.addEventListener('click', () => toggleCampaign(btn.dataset.id, 'PAUSED', btn));
+            });
+            container.querySelectorAll('.resume-btn').forEach(btn => {
+                btn.addEventListener('click', () => toggleCampaign(btn.dataset.id, 'ENABLED', btn));
+            });
+            container.querySelectorAll('.detail-btn').forEach(btn => {
+                btn.addEventListener('click', () => showDetail(btn.dataset.id));
+            });
+        }
+
+        function showDetail(id) {
+            const campaign = campaigns.find(c => c.id === id);
+            if (!campaign) return;
+            alert([
+                campaign.name,
+                '',
+                `ステータス: ${STATUS_LABELS[campaign.status] || campaign.status}`,
+                `種類: ${CHANNEL_LABELS[campaign.channelType] || campaign.channelType}`,
+                `日予算: ${formatYen(campaign.budgetMicros)}`,
+                `費用: ${formatYen(campaign.costMicros)}`,
+                `クリック: ${campaign.clicks}`,
+                `表示回数: ${campaign.impressions}`,
+                `CV: ${campaign.conversions}`
+            ].join('\n'));
+        }
+
+        async function loadCampaigns() {
+            const container = document.getElementById('campaignContainer');
+            container.innerHTML = '<div class="loading"><div class="spinner"></div>キャンペーンを読み込み中...</div>';
+
+            try {
+                const res = await fetch('/api/campaigns');
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || '読み込みに失敗しました');
+                renderCampaigns(data.campaigns);
+            } catch (err) {
+                container.innerHTML = `<div class="empty">${escapeHtml(err.message)}</div>`;
+            }
+        }
+
+        async function toggleCampaign(id, status, button) {
+            const label = status === 'PAUSED' ? '停止' : '再開';
+            const campaign = campaigns.find(c => c.id === id);
+            const name = campaign ? campaign.name : 'このキャンペーン';
+
+            if (!confirm(`「${name}」を${label}しますか？`)) return;
+
+            button.disabled = true;
+            const originalText = button.textContent;
+            button.textContent = '処理中...';
+
+            try {
+                const res = await fetch('/api/campaigns', {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, status })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || `${label}に失敗しました`);
+
+                await loadCampaigns();
+            } catch (err) {
+                showError(err.message);
+                button.disabled = false;
+                button.textContent = originalText;
+            }
+        }
+
+        function showDashboard(auth) {
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.remove('hidden');
+            document.getElementById('refreshBtn').classList.remove('hidden');
+            document.getElementById('accountBar').classList.remove('hidden');
+            document.getElementById('accountEmail').textContent = auth.email || `アカウント: ${auth.customerId}`;
+            loadCampaigns();
+        }
+
+        function showLogin(configured) {
+            document.getElementById('loginView').classList.remove('hidden');
+            document.getElementById('dashboardView').classList.add('hidden');
+            if (!configured) {
+                document.getElementById('setupCard').classList.remove('hidden');
+                document.getElementById('loginBtn').classList.add('hidden');
+            }
+        }
+
+        document.getElementById('refreshBtn').addEventListener('click', loadCampaigns);
+
+        document.addEventListener('touchstart', (e) => {
+            if (window.scrollY === 0) {
+                touchStartY = e.touches[0].clientY;
+                pulling = true;
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!pulling) return;
+            const diff = e.touches[0].clientY - touchStartY;
+            if (diff > 80 && !document.getElementById('dashboardView').classList.contains('hidden')) {
+                pulling = false;
+                loadCampaigns();
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchend', () => { pulling = false; });
+
+        (async function init() {
+            const queryError = getQueryError();
+            if (queryError) showError(queryError);
+
+            try {
+                const auth = await checkAuth();
+                if (auth.authenticated) {
+                    showDashboard(auth);
+                } else {
+                    showLogin(auth.configured);
+                }
+            } catch (err) {
+                showError('接続に失敗しました');
+                showLogin(false);
+            }
+        })();
+    </script>
+</body>
+</html>
