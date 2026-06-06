@@ -1,0 +1,14 @@
+{
+  "name": "debt-lp-v2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Debt reduction landing page with mobile Google Ads admin",
+  "scripts": {
+    "dev": "vercel dev",
+    "setup:oauth": "node scripts/generate-refresh-token.js"
+  },
+  "dependencies": {
+    "google-ads-api": "^23.0.1",
+    "google-auth-library": "^9.15.1"
+  }
+}
