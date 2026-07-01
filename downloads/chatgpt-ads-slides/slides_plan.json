@@ -1,0 +1,97 @@
+{
+  "title": "ChatGPT広告 日本上陸のご案内",
+  "total_slides": 18,
+  "slides": [
+    {
+      "slide_number": 1,
+      "page_type": "cover",
+      "content": "ChatGPT広告\n\n日本上陸のご案内\n2026年6月｜広告運用の新チャネル"
+    },
+    {
+      "slide_number": 2,
+      "page_type": "content",
+      "content": "2026年6月、日本でパイロット運用が開始\n\nOpenAIは6月19日頃から、日本国内でChatGPT内広告のパイロット運用を開始しました。米国（2月）に続き、アジア初・非英語圏初の展開です。"
+    },
+    {
+      "slide_number": 3,
+      "page_type": "content",
+      "content": "AIの「会話の場」に広告が入る\n\n検索エンジンではなく、AIとの対話中に広告が表示される新フォーマットです。ユーザーの相談・比較・意思決定の場に、スポンサー枠として接触できます。"
+    },
+    {
+      "slide_number": 4,
+      "page_type": "content",
+      "content": "回答と広告は完全に分離\n\n広告はAI回答の下部に「スポンサー」ラベル付きの別枠として表示されます。回答本文に広告が混入することはなく、AIの中立性は維持されます。"
+    },
+    {
+      "slide_number": 5,
+      "page_type": "content",
+      "content": "表示対象ユーザー\n\n対象：Free（無料）・Go（月額約1,400円）の18歳以上ログインユーザー\n非対象：Plus / Pro / Business / Enterprise / Education、18歳未満"
+    },
+    {
+      "slide_number": 6,
+      "page_type": "content",
+      "content": "広告を非表示にする方法\n\n有料プラン（Plus等）へのアップグレード、または無料利用回数の制限を受け入れることで、広告を回避できます。ユーザーに選択肢が用意されています。"
+    },
+    {
+      "slide_number": 7,
+      "page_type": "content",
+      "content": "キーワードではなく「会話の文脈」で配信\n\n従来の検索広告がキーワード入札であるのに対し、ChatGPT広告は今の会話内容・過去チャット・メモリをAIが解釈し、関連広告を選定します。"
+    },
+    {
+      "slide_number": 8,
+      "page_type": "content",
+      "content": "配信の4ステップ\n\n① 会話内容をAIが解釈\n② ブランドセーフティチェック\n③ コンテキストヒントと照合\n④ 関連性モデル＋入札で最適な1件を表示"
+    },
+    {
+      "slide_number": 9,
+      "page_type": "content",
+      "content": "プライバシー原則\n\n会話内容・チャット履歴・メモリ・個人情報は広告主に共有されません。広告主が得られるのは表示回数・クリック数などの集計データのみです。"
+    },
+    {
+      "slide_number": 10,
+      "page_type": "content",
+      "content": "コンテキストヒントとは\n\n広告グループ単位で設定する自然文のシグナルです。キーワードの完全一致ではなく、「どんな相談場面で自社サービスが役立つか」を記述します。"
+    },
+    {
+      "slide_number": 11,
+      "page_type": "content",
+      "content": "コンテキストヒントの書き方\n\n❌「ランニングシューズ 安い」\n✅「初めてフルマラソンに挑戦する人向けのメンズランニングシューズを探している」\nユーザー視点の自然文で、相談場面を具体的に書きます。"
+    },
+    {
+      "slide_number": 12,
+      "page_type": "data",
+      "content": "クリエイティブは極短が必須\n\n見出し：8〜10文字（最大50）\n説明文：16〜20文字（最大100）\nスマホ画面前提のため、検索広告より短いコピー設計が求められます。"
+    },
+    {
+      "slide_number": 13,
+      "page_type": "data",
+      "content": "課金形態\n\n認知（Views）：CPM方式｜上限入札 約$60 CPM\nトラフィック（Clicks）：CPC方式｜推奨開始 $3〜5/クリック\n実勢CPMは$15〜$35程度に下落するケースもあります。"
+    },
+    {
+      "slide_number": 14,
+      "page_type": "content",
+      "content": "管理画面：OpenAI Ads Manager Beta\n\nads.openai.com でキャンペーン管理。3層構造：キャンペーン → 広告グループ → 広告。コンテキストヒントは広告グループ単位で設定します。"
+    },
+    {
+      "slide_number": 15,
+      "page_type": "content",
+      "content": "日本での出稿ルート（現状）\n\nセルフサーブ（Ads Manager）：米・英・豪などで開放済み。日本広告主の直接出稿は未開放（ウェイトリスト登録可）\nパートナー経由：国内ローンチパートナーを通じたパイロット出稿が現時点の基本ルート"
+    },
+    {
+      "slide_number": 16,
+      "page_type": "content",
+      "content": "国内ローンチパートナー\n\n電通デジタル\nHakuhodo DY ONE\nサイバーエージェント\nCriteo ほか"
+    },
+    {
+      "slide_number": 17,
+      "page_type": "content",
+      "content": "出稿前に整備すべき3点\n\n① LP・FAQ・比較ページのAEO（AI検索最適化）対応\n② OpenAI Pixel / Conversions API の実装\n③ コンテキストヒントの文案設計（ユーザー視点の自然文）"
+    },
+    {
+      "slide_number": 18,
+      "page_type": "closing",
+      "content": "まとめ\n\nChatGPT広告は「検索広告の延長」ではなく、会話文脈連動型の新チャネルです。B2B・高単価商材との相性が高く、先行者として検証する価値があります。"
+    }
+  ],
+  "style": "clean-tech-blue"
+}
