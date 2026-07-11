@@ -1,19 +1,30 @@
 ---
-description: When redoing work after feedback, restart from scratch instead of patching the previous answer.
+description: Redo work correctly without partial fixes or token-wasting over-correction. Use judgment.
 alwaysApply: true
 ---
 
-# No partial fixes — redo from the beginning
+# Redo with judgment — not partial fixes, not token waste
 
-When the user says to redo, fix, or start over (やり直せ, 最初から, やり直し, redo, start over, don't patch, etc.):
+## Core principle
 
-1. **Do not partially fix** the previous output. Do not keep the old list/plan and swap only the flagged items.
-2. **Restart from zero** with the full requirements. Re-verify every item against the same criteria before delivering.
-3. **Treat corrections as full reruns**, not edits to the last draft. Assume earlier conclusions may all be wrong until re-checked.
-4. This applies to **all projects and task types** (research, code, reviews, recommendations), not only the current task.
+Make the **right** decision. Be accurate and efficient. Do not patch cosmetically, and do not redo everything blindly out of guilt.
 
-## Verification before delivery (when redoing)
+## When the user says redo / やり直せ / start over
 
-- Re-read the original requirements completely.
-- Re-gather or re-check sources; do not reuse unverified claims from the failed attempt.
-- Deliver a complete new result, not a diff against the previous answer.
+1. **Identify the failure mode first** — wrong criterion (e.g. weekday, season, source), sloppy verification, or missing requirement?
+2. **Scope rework to what failed**:
+   - **Narrow scope** (1–2 clear errors, same method was sound): re-check only affected items + anything that shared the same bad assumption. Deliver a clean full answer, not a “diff apology.”
+   - **Broad scope** (systematic sloppiness, wrong methodology, user lost trust): restart from requirements; re-verify all deliverables with the corrected method.
+3. **Never cosmetic-patch** — do not swap flagged lines while leaving the same unverified list, prices, or sources intact.
+4. **Never over-correct** — do not re-fetch/re-read everything “just in case” when the error class is known and isolated.
+
+## Token discipline (user pays for this)
+
+- Prefer **one correct pass** over multiple fix loops.
+- Before acting: ask “What is the minimum verification that makes this trustworthy?”
+- Skip busywork: re-proving what was already correctly sourced does not help.
+- If uncertain whether scope is narrow or broad, **bias toward one extra check on the error class**, not a full rerun of unrelated work.
+
+## Applies to all projects
+
+Research, code, reviews, recommendations — same rule: **smart human judgment, not rigid process, not panic rework.**
