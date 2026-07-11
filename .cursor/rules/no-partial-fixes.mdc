@@ -1,0 +1,19 @@
+---
+description: When redoing work after feedback, restart from scratch instead of patching the previous answer.
+alwaysApply: true
+---
+
+# No partial fixes — redo from the beginning
+
+When the user says to redo, fix, or start over (やり直せ, 最初から, やり直し, redo, start over, don't patch, etc.):
+
+1. **Do not partially fix** the previous output. Do not keep the old list/plan and swap only the flagged items.
+2. **Restart from zero** with the full requirements. Re-verify every item against the same criteria before delivering.
+3. **Treat corrections as full reruns**, not edits to the last draft. Assume earlier conclusions may all be wrong until re-checked.
+4. This applies to **all projects and task types** (research, code, reviews, recommendations), not only the current task.
+
+## Verification before delivery (when redoing)
+
+- Re-read the original requirements completely.
+- Re-gather or re-check sources; do not reuse unverified claims from the failed attempt.
+- Deliver a complete new result, not a diff against the previous answer.
