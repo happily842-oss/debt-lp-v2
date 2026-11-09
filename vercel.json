@@ -8,6 +8,19 @@
   ],
   "routes": [
     {
+      "src": "/xkomon-v16$",
+      "status": 308,
+      "headers": { "Location": "/xkomon-v16/" }
+    },
+    {
+      "src": "/xkomon-v16/$",
+      "dest": "/xkomon-v16/index.html"
+    },
+    {
+      "src": "/xkomon-v16/(.*)",
+      "dest": "/xkomon-v16/$1"
+    },
+    {
       "src": "/img/(.*)",
       "dest": "/img/$1"
     },
